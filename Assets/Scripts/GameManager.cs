@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour
         int progress = noOfPassedRings * (100 / HelixManager.noOfRings);
         gameProgressSlider.value = progress;
 
+        if (gameOver || levelCompleted) {
+            GameObject.FindGameObjectWithTag("GamePlayAudioManager").GetComponent<AudioSource>().Pause();
+        }
+
         if (gameOver) {
             Time.timeScale = 0;
             gameOverPanel.SetActive(true);

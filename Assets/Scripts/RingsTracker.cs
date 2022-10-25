@@ -14,6 +14,7 @@ public class RingsTracker : MonoBehaviour
     void Update()
     {
         if (transform.position.y > player.position.y) {
+            FindObjectOfType<AudioManager>().Play("whoosh");
             GameManager.noOfPassedRings++;
             Destroy(gameObject);
         }

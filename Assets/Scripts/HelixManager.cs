@@ -24,11 +24,6 @@ public class HelixManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-
-    }
-
     public void SpawnHelixRings(int ringIndex) {
         GameObject ring = Instantiate(helixRings[ringIndex], transform.up * ySpawn, Quaternion.identity);
         ring.transform.parent = transform;
