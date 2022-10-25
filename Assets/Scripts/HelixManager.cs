@@ -13,12 +13,16 @@ public class HelixManager : MonoBehaviour
     {
         noOfRings = GameManager.currentLevel + 5;
 
-        for (int i = 0; i < noOfRings; i++) {
-            if (i == 0) {
+        for (int i = 0; i < noOfRings; i++) 
+        {
+            if (i == 0) 
+            {
                 SpawnHelixRings(0);
-            } else if (i == (noOfRings - 1)) {
+            } else if (i == (noOfRings - 1)) 
+            {
                 SpawnHelixRings(helixRings.Length - 1);
-            } else {
+            } else 
+            {
                 SpawnHelixRings(Random.Range(0, helixRings.Length - 1));
             }
         }

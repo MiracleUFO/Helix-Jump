@@ -13,7 +13,8 @@ public class RingsTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y > player.position.y) {
+        if (transform.position.y > player.position.y) 
+        {
             FindObjectOfType<AudioManager>().Play("whoosh");
             GameManager.noOfPassedRings++;
             Destroy(gameObject);

@@ -19,12 +19,15 @@ public class PlayerController : MonoBehaviour
         audioManager.Play("bounce");
 
         string materialName = collision.transform.GetComponent<MeshRenderer>().material.name;
-        if (materialName == "Safe (Instance)") {
+        if (materialName == "Safe (Instance)") 
+        {
 
-        } else if (materialName == "Unsafe (Instance)") {
+        } else if (materialName == "Unsafe (Instance)") 
+        {
             audioManager.Play("gameover");
             GameManager.gameOver = true;
-        } else if (materialName == "LastRing (Instance)" && !GameManager.levelCompleted) {
+        } else if (materialName == "LastRing (Instance)" && !GameManager.levelCompleted) 
+        {
             audioManager.Play("winlevel");
             GameManager.levelCompleted = true;
         }

@@ -19,46 +19,52 @@ public class GameManager : MonoBehaviour
     public Slider gameProgressSlider;
 
     public static int noOfPassedRings;
-    public static int nextLevel;
+
+    public static bool mute;    
 
     void Start()
     {
         Time.timeScale = 1;
-        gameOver = levelCompleted = false;
+        gameOver = levelCompleted = mute = false;
         noOfPassedRings = 0;
     }
 
     void Awake()
     {
+        PlayerPrefs.SetInt("helixJumpCurrentLevel", 1); // to remove
         currentLevel = PlayerPrefs.GetInt("helixJumpCurrentLevel", 1);
     }
 
     void Update()
     {
         //  Set level UI text
-        currentLevelText.text = currentLevel.ToString();
+        currentLevelText.text = currentLevel.ToString();  
         nextLevelText.text = (currentLevel+1).ToString();
 
         int progress = noOfPassedRings * (100 / HelixManager.noOfRings);
         gameProgressSlider.value = progress;
 
-        if (gameOver || levelCompleted) {
-            GameObject.FindGameObjectWithTag("GamePlayAudioManager").GetComponent<AudioSource>().Pause();
-        }
+        if (gameOver || levelCompleted || mute)
+            GameObject.FindGameObjectWithTag("GamePlayAudioManager").GetComponent<AudioSource>().volume = 0;
 
-        if (gameOver) {
+        if (!mute)
+            GameObject.FindGameObjectWithTag("GamePlayAudioManager").GetComponent<AudioSource>().volume = 1;
+
+        if (gameOver) 
+        {
             Time.timeScale = 0;
             gameOverPanel.SetActive(true);
 
-            if (Input.GetButtonDown("Fire1")) {
+            if (Input.GetButtonDown("Fire1"))
                 SceneManager.LoadScene(0);
-            }
         }
 
-        if (levelCompleted) {
+        if (levelCompleted) 
+        {
             levelCompletedPanel.SetActive(true);
 
-            if (Input.GetButtonDown("Fire1")) {
+            if (Input.GetButtonDown("Fire1")) 
+            {
                 PlayerPrefs.SetInt("helixJumpCurrentLevel", currentLevel + 1);
                 SceneManager.LoadScene(0);
             }

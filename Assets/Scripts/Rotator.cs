@@ -5,11 +5,7 @@ using UnityEngine;
 public class Rotator : MonoBehaviour
 {
     public float rotationSpeed = 200.0f;
-
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
+    
     void Update()
     {
         if (Input.GetMouseButton(0)) {
