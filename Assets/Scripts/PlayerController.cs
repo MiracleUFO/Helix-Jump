@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
 
     private AudioManager audioManager;
 
+    public GameObject explosionFx;
+
+
     void Start() 
     {
         audioManager = FindObjectOfType<AudioManager>();
@@ -26,8 +29,12 @@ public class PlayerController : MonoBehaviour
         {
             audioManager.Play("gameover");
             GameManager.gameOver = true;
-        } else if (materialName == "LastRing (Instance)" && !GameManager.levelCompleted) 
+        } else if (materialName == "LastRing (Instance)" && !GameManager.levelCompleted)
         {
+            //  Show fireworks when user clears level
+            Vector3 newExplosionPos = new Vector3(explosionFx.transform.position.x, -50, explosionFx.transform.position.z);
+            Instantiate(explosionFx, newExplosionPos, explosionFx.transform.rotation);
+
             audioManager.Play("winlevel");
             GameManager.levelCompleted = true;
         }
