@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverPanel;
     public GameObject levelCompletedPanel;
+    public GameObject swipeToRotate;
 
     public static int currentLevel;
     public TextMeshProUGUI currentLevelText;
@@ -49,6 +50,10 @@ public class GameManager : MonoBehaviour
 
         if (!mute)
             GameObject.FindGameObjectWithTag("GamePlayAudioManager").GetComponent<AudioSource>().volume = 1;
+
+        if (Input.GetMouseButtonDown(0) && !levelCompleted && !gameOver) {
+            swipeToRotate.SetActive(false);
+        }
 
         if (gameOver) 
         {

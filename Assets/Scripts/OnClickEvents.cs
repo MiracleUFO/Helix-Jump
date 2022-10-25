@@ -39,4 +39,16 @@ public class OnClickEvents : MonoBehaviour
             menuIcons[i].SetActive(menuShow);
         }
     }
+
+    public void ToggleStore(GameObject Menu)
+    {
+        if (Menu.activeSelf) {
+            Time.timeScale = 1;
+            Menu.SetActive(false);
+        } else {
+            Time.timeScale = 0;
+            Menu.SetActive(true);
+        }
+       
+    }
 }

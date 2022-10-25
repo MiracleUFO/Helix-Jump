@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
             GameManager.gameOver = true;
         } else if (materialName == "LastRing (Instance)" && !GameManager.levelCompleted)
         {
-            //  Show fireworks when user clears level
+            //  Show fireworks when player clears level
             Vector3 newExplosionPos = new Vector3(explosionFx.transform.position.x, -50, explosionFx.transform.position.z);
             Instantiate(explosionFx, newExplosionPos, explosionFx.transform.rotation);
 
