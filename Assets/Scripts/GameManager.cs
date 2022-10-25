@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     public static bool isGameStarted;
 
+    private bool fingerHitGameScreen;
+
     void Start()
     {
         Time.timeScale = 1;
@@ -58,12 +60,15 @@ public class GameManager : MonoBehaviour
         if (!mute)
             GameObject.FindGameObjectWithTag("GamePlayAudioManager").GetComponent<AudioSource>().volume = 1;
 
+        //  For PC & Mobile
+        fingerHitGameScreen = (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetMouseButtonDown(0);
+
         //  Set game started to true if user interacts with the UI when game is not over or level completed
-        if (Input.GetMouseButtonDown(0) && !levelCompleted && !gameOver && !isGameStarted)
+        if (fingerHitGameScreen && !levelCompleted && !gameOver && !isGameStarted)
             isGameStarted = true;
 
         //  Removes rotation animation instruction when user clicks on screen for the first time
-        if (Input.GetMouseButtonDown(0) && !levelCompleted && !gameOver)
+        if (fingerHitGameScreen && !levelCompleted && !gameOver)
             swipeToRotate.SetActive(false);
 
         if (isGameStarted) {
