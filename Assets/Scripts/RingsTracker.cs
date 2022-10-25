@@ -17,6 +17,12 @@ public class RingsTracker : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().Play("whoosh");
             GameManager.noOfPassedRings++;
+
+            //  If game started is not set to true (user has not interacted with UI yet) but the PLAYER has passed a ring, set is game started to true
+            if (!GameManager.isGameStarted)
+                GameManager.isGameStarted = true;
+            
+            GameManager.score += 2;
             Destroy(gameObject);
         }
     }

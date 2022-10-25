@@ -17,17 +17,24 @@ public class GameManager : MonoBehaviour
     public static int currentLevel;
     public TextMeshProUGUI currentLevelText;
     public TextMeshProUGUI nextLevelText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highScoreText;
     public Slider gameProgressSlider;
 
     public static int noOfPassedRings;
 
-    public static bool mute;    
+    public static bool mute;
+
+    public static int score = 0;
+
+    public static bool isGameStarted;
 
     void Start()
     {
         Time.timeScale = 1;
         gameOver = levelCompleted = mute = false;
         noOfPassedRings = 0;
+        highScoreText.text = "Best Score\n" + PlayerPrefs.GetInt("helixJumpHighScore", 0);
     }
 
     void Awake()
@@ -51,8 +58,17 @@ public class GameManager : MonoBehaviour
         if (!mute)
             GameObject.FindGameObjectWithTag("GamePlayAudioManager").GetComponent<AudioSource>().volume = 1;
 
-        if (Input.GetMouseButtonDown(0) && !levelCompleted && !gameOver) {
+        //  Set game started to true if user interacts with the UI when game is not over or level completed
+        if (Input.GetMouseButtonDown(0) && !levelCompleted && !gameOver && !isGameStarted)
+            isGameStarted = true;
+
+        //  Removes rotation animation instruction when user clicks on screen for the first time
+        if (Input.GetMouseButtonDown(0) && !levelCompleted && !gameOver)
             swipeToRotate.SetActive(false);
+
+        if (isGameStarted) {
+            highScoreText.text = "";
+            scoreText.text = score.ToString();
         }
 
         if (gameOver) 
@@ -60,8 +76,14 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             gameOverPanel.SetActive(true);
 
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1")) 
+            {
+                if (score > PlayerPrefs.GetInt("helixJumpHighScore"))
+                    PlayerPrefs.SetInt("helixJumpHighScore", score);
+
+                score = 0;
                 SceneManager.LoadScene(0);
+            }
         }
 
         if (levelCompleted) 
