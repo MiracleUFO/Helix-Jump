@@ -7,10 +7,12 @@ public class HelixManager : MonoBehaviour
     public GameObject[] helixRings;
     public float ySpawn = 0;
     public float ringsDistance =  5;
-    public int noOfRings = 7;
+    public static int noOfRings;
 
     void Start()
     {
+        noOfRings = GameManager.currentLevel + 5;
+
         for (int i = 0; i < noOfRings; i++) {
             if (i == 0) {
                 SpawnHelixRings(0);
