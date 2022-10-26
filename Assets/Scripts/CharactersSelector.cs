@@ -10,6 +10,10 @@ public class CharactersSelector : MonoBehaviour
 
     public GameObject[] secondClones;
 
+    public GameObject player2;
+
+    public GameObject player3;
+
     private int selectedCharacter = 0;
     private int iterator;
 
@@ -25,10 +29,15 @@ public class CharactersSelector : MonoBehaviour
         iterator = GameManager.currentLevel >= 3 ? 3 : GameManager.currentLevel;
 
         if (iterator >= 2) {
+            player2.SetActive(true);
             firstClones[selectedCharacter].SetActive(true);
             if (iterator == 3) {
+                player3.SetActive(true);
                 secondClones[selectedCharacter].SetActive(true);
             }
+        } else if (iterator == 1) {
+            player2.SetActive(false);
+            player3.SetActive(false);
         }
     }
 

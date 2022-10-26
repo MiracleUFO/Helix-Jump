@@ -46,15 +46,10 @@ public class GameManager : MonoBehaviour
         noOfPassedRings = 0;
         noOfHearts = 3;
         highScoreText.text = "Best Score\n" + PlayerPrefs.GetInt("helixJumpHighScore", 0);
-
-        for (int i = 0; i < noOfHearts; i++) {
-            hearts = "❤️";
-        }
     }
 
     void Awake()
     {
-        PlayerPrefs.SetInt("helixJumpCurrentLevel", 1); //remove
         currentLevel = PlayerPrefs.GetInt("helixJumpCurrentLevel", 1);
     }
 
@@ -129,9 +124,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < noOfHearts; i++) {
-            hearts = "❤️";
-        }
+        hearts = new string ('+', noOfHearts);
+        heartsText.text = hearts;
 
         //if (hearts.Length)
            // StartCoroutine(this.SetUITextThatHasEmoji(heartsText.text, "" + hearts));

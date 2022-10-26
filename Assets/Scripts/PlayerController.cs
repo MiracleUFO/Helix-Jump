@@ -22,10 +22,13 @@ public class PlayerController : MonoBehaviour
         audioManager.Play("bounce");
 
         string materialName = collision.transform.GetComponent<MeshRenderer>().material.name;
-        if (materialName == "Unsafe (Instance)") 
+        if (materialName == "Unsafe (Instance)")
         {
-            audioManager.Play("gameover");
-            GameManager.gameOver = true;
+            if (GameManager.noOfHearts <= 0) {
+                audioManager.Play("gameover");
+                GameManager.gameOver = true;
+            } else 
+                GameManager.noOfHearts--;
         } else if (materialName == "LastRing (Instance)" && !GameManager.levelCompleted)
         {
             //  Show fireworks when player clears level
