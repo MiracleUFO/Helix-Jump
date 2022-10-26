@@ -35,8 +35,14 @@ public class CharactersSelector : MonoBehaviour
                 player3.SetActive(true);
                 secondClones[selectedCharacter].SetActive(true);
             }
-        } else if (iterator == 1) {
+        } 
+        
+        if (iterator == 1) {
             player2.SetActive(false);
+            player3.SetActive(false);
+        }
+
+        if (iterator == 2) {
             player3.SetActive(false);
         }
     }
