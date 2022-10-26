@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI continueOrRestartText;
+
+    public TextMeshProUGUI heartsText;
+
+    public static int noOfHearts;
+
     public Slider gameProgressSlider;
 
     public static int noOfPassedRings;
@@ -32,12 +37,19 @@ public class GameManager : MonoBehaviour
 
     private bool fingerHitGameScreen;
 
+    private string hearts;
+
     void Start()
     {
         Time.timeScale = 1;
         gameOver = levelCompleted = mute = false;
         noOfPassedRings = 0;
+        noOfHearts = 3;
         highScoreText.text = "Best Score\n" + PlayerPrefs.GetInt("helixJumpHighScore", 0);
+
+        for (int i = 0; i < noOfHearts; i++) {
+            hearts = "❤️";
+        }
     }
 
     void Awake()
@@ -116,5 +128,12 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(0);
             }
         }
+
+        for (int i = 0; i < noOfHearts; i++) {
+            hearts = "❤️";
+        }
+
+        //if (hearts.Length)
+           // StartCoroutine(this.SetUITextThatHasEmoji(heartsText.text, "" + hearts));
     }
 }
