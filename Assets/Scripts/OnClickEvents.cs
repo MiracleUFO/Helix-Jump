@@ -37,6 +37,8 @@ public class OnClickEvents : MonoBehaviour
 
         for (int i = 0; i < menuIcons.Length; i++) {
             menuIcons[i].SetActive(menuShow);
+            menuIcons[menuIcons.Length - 1].SetActive(false);
+            Time.timeScale = 1;
         }
     }
 

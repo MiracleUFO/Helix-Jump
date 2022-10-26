@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI nextLevelText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI continueOrRestartText;
     public Slider gameProgressSlider;
 
     public static int noOfPassedRings;
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        PlayerPrefs.SetInt("helixJumpCurrentLevel", 1); // to remove
+        PlayerPrefs.SetInt("helixJumpCurrentLevel", 1); //remove
         currentLevel = PlayerPrefs.GetInt("helixJumpCurrentLevel", 1);
     }
 
@@ -68,8 +69,13 @@ public class GameManager : MonoBehaviour
             isGameStarted = true;
 
         //  Removes rotation animation instruction when user clicks on screen for the first time
-        if (fingerHitGameScreen && !levelCompleted && !gameOver)
+        if (fingerHitGameScreen && !levelCompleted && !gameOver) 
+        {
             swipeToRotate.SetActive(false);
+        } else if (levelCompleted || gameOver) 
+        {
+            swipeToRotate.SetActive(false);
+        }
 
         if (isGameStarted) {
             highScoreText.text = "";
@@ -95,9 +101,18 @@ public class GameManager : MonoBehaviour
         {
             levelCompletedPanel.SetActive(true);
 
+            if (currentLevel >= 5) 
+            {
+                continueOrRestartText.text = "LAST LEVEL\nRESTART";
+            } else 
+            {
+                continueOrRestartText.text = "TAP TO CONTINUE";
+            }
+
             if (Input.GetButtonDown("Fire1")) 
             {
-                PlayerPrefs.SetInt("helixJumpCurrentLevel", currentLevel + 1);
+                int level = currentLevel == 5 ? 5 : currentLevel + 1;
+                PlayerPrefs.SetInt("helixJumpCurrentLevel", level);
                 SceneManager.LoadScene(0);
             }
         }

@@ -22,10 +22,7 @@ public class PlayerController : MonoBehaviour
         audioManager.Play("bounce");
 
         string materialName = collision.transform.GetComponent<MeshRenderer>().material.name;
-        if (materialName == "Safe (Instance)") 
-        {
-
-        } else if (materialName == "Unsafe (Instance)") 
+        if (materialName == "Unsafe (Instance)") 
         {
             audioManager.Play("gameover");
             GameManager.gameOver = true;

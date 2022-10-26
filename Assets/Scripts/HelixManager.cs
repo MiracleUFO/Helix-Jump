@@ -15,7 +15,7 @@ public class HelixManager : MonoBehaviour
 
         for (int i = 0; i < noOfRings; i++) 
         {
-            if (i == 0) 
+            if (i == 0)
             {
                 SpawnHelixRings(0);
             } else if (i == (noOfRings - 1)) 
